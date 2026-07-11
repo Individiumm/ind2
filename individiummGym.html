@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IndividiummClub — Фитнес-курсы и обучение</title>
+<meta name="description" content="Персональные фитнес-курсы и обучение от IndividiummClub. Авторская методика Қалқабек Е.Д. Индивидуальный подход, разбор техники, питание и сопровождение." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0E0817;
+    --bg-soft: #170F24;
+    --surface: #1E1430;
+    --surface-hi: #291C40;
+    --border: rgba(196, 169, 255, 0.14);
+    --border-strong: rgba(196, 169, 255, 0.26);
+    --text: #F4F0FB;
+    --text-muted: #B3A4CC;
+    --text-dim: #8577A3;
+    --accent: #8B5CF6;
+    --accent-2: #C084FC;
+    --accent-deep: #4C1D95;
+    --accent-contrast: #FFFFFF;
+    --shadow: 0 20px 60px rgba(76, 29, 149, 0.35);
+
+    --font-display: "Unbounded", "Segoe UI", sans-serif;
+    --font-body: "Manrope", "Segoe UI", Arial, sans-serif;
+
+    --container: 1180px;
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 26px;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #FAF7FF;
+      --bg-soft: #F1E9FC;
+      --surface: #FFFFFF;
+      --surface-hi: #F4EEFC;
+      --border: rgba(91, 32, 168, 0.14);
+      --border-strong: rgba(91, 32, 168, 0.28);
+      --text: #1C1128;
+      --text-muted: #5B4C72;
+      --text-dim: #8676A0;
+      --accent: #7C3AED;
+      --accent-2: #A855F7;
+      --accent-deep: #5B21B6;
+      --accent-contrast: #FFFFFF;
+      --shadow: 0 20px 50px rgba(124, 58, 237, 0.16);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0E0817;
+    --bg-soft: #170F24;
+    --surface: #1E1430;
+    --surface-hi: #291C40;
+    --border: rgba(196, 169, 255, 0.14);
+    --border-strong: rgba(196, 169, 255, 0.26);
+    --text: #F4F0FB;
+    --text-muted: #B3A4CC;
+    --text-dim: #8577A3;
+    --accent: #8B5CF6;
+    --accent-2: #C084FC;
+    --accent-deep: #4C1D95;
+    --accent-contrast: #FFFFFF;
+    --shadow: 0 20px 60px rgba(76, 29, 149, 0.35);
+  }
+
+  :root[data-theme="light"] {
+    --bg: #FAF7FF;
+    --bg-soft: #F1E9FC;
+    --surface: #FFFFFF;
+    --surface-hi: #F4EEFC;
+    --border: rgba(91, 32, 168, 0.14);
+    --border-strong: rgba(91, 32, 168, 0.28);
+    --text: #1C1128;
+    --text-muted: #5B4C72;
+    --text-dim: #8676A0;
+    --accent: #7C3AED;
+    --accent-2: #A855F7;
+    --accent-deep: #5B21B6;
+    --accent-contrast: #FFFFFF;
+    --shadow: 0 20px 50px rgba(124, 58, 237, 0.16);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, svg, canvas { display: block; max-width: 100%; }
+
+  a { color: inherit; }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: clamp(20px, 5vw, 48px);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.12;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  p { margin: 0; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    flex: none;
+  }
+
+  /* ---------- Header ---------- */
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 18px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .logo span {
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .logo small {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.94rem;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 13px 26px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: var(--accent-contrast);
+    box-shadow: 0 12px 30px rgba(139, 92, 246, 0.35);
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(139, 92, 246, 0.45); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+
+  .btn-ghost:hover { border-color: var(--accent-2); color: var(--accent-2); }
+
+  .btn-sm { padding: 10px 20px; font-size: 0.85rem; }
+
+  .nav-cta { display: flex; align-items: center; gap: 16px; }
+  .nav-mobile { display: none; }
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(64px, 9vw, 108px) clamp(56px, 8vw, 96px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 70%;
+    background: radial-gradient(60% 60% at 30% 20%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(36px, 5vw, 64px);
+    align-items: center;
+  }
+
+  #pulse-canvas {
+    position: absolute;
+    inset: auto 0 0 0;
+    width: 100%;
+    height: 140px;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.4rem, 3.6vw + 1rem, 4.1rem);
+    letter-spacing: -0.015em;
+    margin-top: 18px;
+  }
+
+  .hero-copy h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero-sub {
+    margin-top: 22px;
+    max-width: 46ch;
+    font-size: 1.08rem;
+    color: var(--text-muted);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 28px;
+    margin-top: 46px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-stats div strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero-stats div span {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  .author-card {
+    position: relative;
+    background: linear-gradient(165deg, var(--surface-hi), var(--surface));
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    padding: 34px 30px;
+    box-shadow: var(--shadow);
+  }
+
+  .author-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 30px; right: 30px;
+    height: 3px;
+    border-radius: 0 0 6px 6px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  }
+
+  .author-badge {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #fff;
+  }
+
+  .author-card h3 {
+    margin-top: 18px;
+    font-size: 1.25rem;
+  }
+
+  .author-role {
+    margin-top: 4px;
+    font-size: 0.88rem;
+    color: var(--accent-2);
+    font-weight: 700;
+  }
+
+  .author-quote {
+    margin-top: 18px;
+    font-size: 0.96rem;
+    color: var(--text-muted);
+    border-left: 2px solid var(--border-strong);
+    padding-left: 14px;
+  }
+
+  /* ---------- Section shell ---------- */
+
+  section { padding-block: clamp(64px, 8vw, 100px); }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: clamp(36px, 5vw, 56px);
+  }
+
+  .section-head h2 { font-size: clamp(1.85rem, 2.4vw + 1rem, 2.6rem); max-width: 20ch; }
+
+  .section-head p {
+    max-width: 34ch;
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+
+  /* ---------- Offer list (catalog style) ---------- */
+
+  .offer-list {
+    border-top: 1px solid var(--border);
+  }
+
+  .offer-row {
+    display: grid;
+    grid-template-columns: 72px 1.1fr 1.4fr;
+    gap: 28px;
+    align-items: start;
+    padding-block: 30px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.25s ease;
+  }
+
+  .offer-row:hover { background: color-mix(in srgb, var(--accent) 5%, transparent); }
+
+  .offer-index {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-dim);
+    padding-top: 4px;
+  }
+
+  .offer-row h3 {
+    font-size: 1.28rem;
+    letter-spacing: -0.01em;
+  }
+
+  .offer-row p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 52ch;
+  }
+
+  /* ---------- Advantages ---------- */
+
+  .adv-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .adv-card {
+    background: var(--surface);
+    padding: 32px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .adv-card.wide { grid-column: span 2; flex-direction: row; align-items: center; gap: 30px; }
+
+  .adv-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--bg-soft);
+    border: 1px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+  }
+
+  .adv-mark::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  }
+
+  .adv-card h3 { font-size: 1.1rem; }
+  .adv-card p { color: var(--text-muted); font-size: 0.98rem; }
+  .adv-card.wide h3 { font-size: 1.2rem; margin-bottom: 6px; }
+
+  /* ---------- Contact ---------- */
+
+  .contact {
+    background: linear-gradient(160deg, var(--surface-hi), var(--bg-soft));
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    padding: clamp(40px, 6vw, 64px);
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    box-shadow: var(--shadow);
+  }
+
+  .contact h2 { font-size: clamp(1.8rem, 2.4vw + 1rem, 2.4rem); max-width: 16ch; }
+
+  .contact-sub { margin-top: 14px; color: var(--text-muted); max-width: 42ch; }
+
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-method {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+  }
+
+  .contact-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #fff;
+  }
+
+  .contact-method div span {
+    display: block;
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 700;
+  }
+
+  .contact-method div strong {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .placeholder-note {
+    margin-top: 10px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding-block: 30px;
+    margin-top: clamp(40px, 6vw, 60px);
+  }
+
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.86rem;
+    color: var(--text-dim);
+  }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 880px) {
+    .nav-links { display: none; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; row-gap: 18px; }
+    .offer-row { grid-template-columns: 44px 1fr; }
+    .offer-row p { grid-column: 2; }
+    .adv-grid { grid-template-columns: 1fr; }
+    .adv-card.wide { grid-column: span 1; flex-direction: column; align-items: flex-start; }
+    .contact { grid-template-columns: 1fr; }
+    .section-head { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 520px) {
+    .nav-cta .btn-ghost { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">
+      <span>Individiumm</span>Club
+      <small>Fitness&nbsp;Lab</small>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#offer">Предложения</a></li>
+      <li><a href="#advantages">Преимущества</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="#contact">Связаться</a>
+      <a class="btn btn-primary btn-sm" href="#contact">Записаться</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">IndividiummClub · Фитнес-курсы и обучение</span>
+        <h1>Тренируйся по системе, построенной <em>под тебя</em></h1>
+        <p class="hero-sub">
+          Авторская методика Қалқабек Е.Д. — персональные программы, онлайн-курсы
+          и сопровождение, которые учитывают твой уровень, цель и график, а не
+          подгоняют тебя под чужой шаблон.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Начать обучение</a>
+          <a class="btn btn-ghost" href="#offer">Что входит в программу</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>5</strong><span>направлений обучения</span></div>
+          <div><strong>1:1</strong><span>формат работы с тренером</span></div>
+          <div><strong>100%</strong><span>индивидуальная программа</span></div>
+        </div>
+      </div>
+
+      <div class="author-card">
+        <div class="author-badge">ҚЕ</div>
+        <h3>Қалқабек Е.Д.</h3>
+        <p class="author-role">Автор методики, основатель IndividiummClub</p>
+        <p class="author-quote">
+          «Результат держится не на мотивации, а на системе, которая
+          подходит именно тебе. Поэтому каждая программа начинается
+          с человека, а не с шаблона».
+        </p>
+      </div>
+    </div>
+    <canvas id="pulse-canvas" aria-hidden="true"></canvas>
+  </section>
+
+  <section id="offer">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Что мы предлагаем</h2>
+        <p>Пять направлений, из которых складывается полноценная программа обучения и тренировок.</p>
+      </div>
+
+      <div class="offer-list">
+        <div class="offer-row">
+          <span class="offer-index">01</span>
+          <h3>Персональные программы тренировок</h3>
+          <p>Индивидуальный план под цель, уровень подготовки и график — с учётом здоровья и предыдущего опыта.</p>
+        </div>
+        <div class="offer-row">
+          <span class="offer-index">02</span>
+          <h3>Онлайн-курсы по силовой и функциональной подготовке</h3>
+          <p>Структурированные курсы с разбором техники, постепенной прогрессией нагрузок и контролем результата.</p>
+        </div>
+        <div class="offer-row">
+          <span class="offer-index">03</span>
+          <h3>Разбор и коррекция техники</h3>
+          <p>Видеоанализ упражнений и исправление ошибок, которые тормозят прогресс и создают риск травм.</p>
+        </div>
+        <div class="offer-row">
+          <span class="offer-index">04</span>
+          <h3>Питание и восстановление</h3>
+          <p>Рекомендации по рациону и режиму восстановления, встроенные в программу тренировок, а не отдельно от неё.</p>
+        </div>
+        <div class="offer-row">
+          <span class="offer-index">05</span>
+          <h3>Личное сопровождение тренера</h3>
+          <p>Обратная связь на каждом этапе — от первого занятия до выхода на новый уровень подготовки.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="advantages">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Почему выбирают IndividiummClub</h2>
+        <p>Пять причин, по которым ученики остаются в программе надолго.</p>
+      </div>
+
+      <div class="adv-grid">
+        <div class="adv-card">
+          <div class="adv-mark"></div>
+          <h3>Индивидуальный подход</h3>
+          <p>Программа строится под конкретного человека, а не подбирается из готового шаблона.</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-mark"></div>
+          <h3>Опыт и методология автора</h3>
+          <p>Курс основан на практике и методике Қалқабек Е.Д., отработанной на реальных учениках.</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-mark"></div>
+          <h3>Гибкий формат</h3>
+          <p>Онлайн, офлайн или смешанный формат — обучение подстраивается под твой ритм жизни.</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-mark"></div>
+          <h3>Постоянная обратная связь</h3>
+          <p>Программа корректируется по мере прогресса, а не выдаётся один раз и навсегда.</p>
+        </div>
+        <div class="adv-card wide">
+          <div class="adv-mark"></div>
+          <div>
+            <h3>Честный результат</h3>
+            <p>Реалистичные цели, прозрачный прогресс и никаких пустых обещаний быстрого результата без работы.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <span class="eyebrow">Начнём</span>
+          <h2 style="margin-top:14px;">Свяжитесь с нами</h2>
+          <p class="contact-sub">
+            Расскажите о своей цели — подберём формат обучения и ближайшую
+            дату старта программы.
+          </p>
+        </div>
+        <div>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="contact-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <span>Телефон</span>
+                <strong>+7 (___) ___-__-__</strong>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" stroke="none"/><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+              </div>
+              <div>
+                <span>Email</span>
+                <strong>info@individiummclub.kz</strong>
+              </div>
+            </div>
+          </div>
+          <p class="placeholder-note">* Указаны примерные данные для макета — замените на реальный номер и почту.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© 2026 IndividiummClub. Автор методики — Қалқабек Е.Д.</span>
+    <span>Фитнес-курсы и обучение с индивидуальным подходом</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var canvas = document.getElementById('pulse-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w, h, t = 0;
+
+    function resize() {
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function pulsePath(offset) {
+      var path = new Path2D();
+      var midY = h * 0.62;
+      var amp = h * 0.34;
+      path.moveTo(-40, midY);
+      for (var x = -40; x <= w + 40; x += 2) {
+        var cx = x + offset;
+        var seg = ((cx % 260) + 260) % 260;
+        var y = midY;
+        if (seg > 90 && seg < 100) y = midY - amp * 0.25;
+        else if (seg >= 100 && seg < 112) y = midY + amp * 0.9 * ((seg - 100) / 12);
+        else if (seg >= 112 && seg < 124) y = midY + amp * 0.9 - amp * 1.7 * ((seg - 112) / 12);
+        else if (seg >= 124 && seg < 140) y = midY - amp * 0.8 + amp * 0.9 * ((seg - 124) / 16);
+        path.lineTo(x, y);
+      }
+      return path;
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      var grad = ctx.createLinearGradient(0, 0, w, 0);
+      grad.addColorStop(0, 'rgba(196,132,252,0)');
+      grad.addColorStop(0.5, 'rgba(139,92,246,0.9)');
+      grad.addColorStop(1, 'rgba(196,132,252,0)');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 2;
+      ctx.lineJoin = 'round';
+      ctx.stroke(pulsePath(t));
+    }
+
+    function loop() {
+      t += 1.6;
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', function () { resize(); draw(); });
+    resize();
+    if (reduceMotion) {
+      draw();
+    } else {
+      loop();
+    }
+  })();
+</script>
+
+</body>
+</html>
